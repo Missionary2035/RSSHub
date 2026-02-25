@@ -15535,6 +15535,28 @@ export default {
         ],
         "location": "feeds.ts",
         "module": () => import('@/routes/bestblogs/feeds.ts')
+      },
+      "/newsletter": {
+        "path": "/newsletter",
+        "categories": [
+          "programming"
+        ],
+        "example": "/bestblogs/newsletter",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "精选推送",
+        "maintainers": [
+          "occam-7"
+        ],
+        "location": "newsletter.ts",
+        "module": () => import('@/routes/bestblogs/newsletter.ts')
       }
     },
     "name": "bestblogs.dev",
@@ -37771,6 +37793,32 @@ export default {
         "description": "对于豆瓣用户想看的内容，在 `routeParams` 参数中以 query string 格式设置如下选项可以控制输出的样式\n\n| 键         | 含义       | 接受的值 | 默认值 |\n| ---------- | ---------- | -------- | ------ |\n| pagesCount | 查询页面数 |          | 1      |",
         "location": "people/wish.ts",
         "module": () => import('@/routes/douban/people/wish.ts')
+      },
+      "/tv/coming/:sortBy?/:count?": {
+        "path": "/tv/coming/:sortBy?/:count?",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/douban/tv/coming",
+        "parameters": {
+          "sortBy": "排序方式，可选，支持 `hot` 或 `time`，默认 `hot`",
+          "count": "请求上游返回数量，可选，正整数，默认 `10`"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "即将播出的剧集",
+        "maintainers": [
+          "honue"
+        ],
+        "description": "| 路径参数 | 含义             | 接受的值 | 默认值 |\n| -------- | ---------------- | -------- | ------ |\n| sortBy   | 排序方式         | hot/time | hot    |\n| count    | 请求上游返回数量 | 正整数   | 10     |\n\n  用例：`/douban/tv/coming/hot/10`\n\n::: tip\n  服务端请求固定使用 `sortby=hot` 拉取数据，再按 `sortBy` 参数在本地重排；条目数量可通过 `count` 调整，仍可叠加 RSSHub 通用参数 `limit`。\n:::",
+        "location": "tv/coming.ts",
+        "module": () => import('@/routes/douban/tv/coming.ts')
       }
     },
     "name": "豆瓣",
