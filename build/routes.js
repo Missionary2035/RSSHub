@@ -10841,6 +10841,64 @@ export default {
   },
   "apple": {
     "routes": {
+      "/apps/update/:country/:id/:platform?": {
+        "path": "/apps/update/:country/:id/:platform?",
+        "categories": [
+          "program-update"
+        ],
+        "view": 5,
+        "example": "/apple/apps/update/us/id408709785",
+        "parameters": {
+          "country": "App Store Country, obtain from the app URL, see below",
+          "id": "App id, obtain from the app URL",
+          "platform": {
+            "description": "App Platform, see below, all by default",
+            "options": [
+              {
+                "value": "All",
+                "label": "all"
+              },
+              {
+                "value": "iOS",
+                "label": "iOS"
+              },
+              {
+                "value": "macOS",
+                "label": "macOS"
+              },
+              {
+                "value": "tvOS",
+                "label": "tvOS"
+              }
+            ]
+          }
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "apps.apple.com/:country/app/:appSlug/:id",
+              "apps.apple.com/:country/app/:id"
+            ],
+            "target": "/apps/update/:country/:id"
+          }
+        ],
+        "name": "App Update",
+        "maintainers": [
+          "EkkoG",
+          "nczitzk"
+        ],
+        "description": "\n::: tip\n  For example, the URL of [GarageBand](https://apps.apple.com/us/app/garageband/id408709785) in the App Store is `https://apps.apple.com/us/app/garageband/id408709785`. In this case, the `App Store Country` parameter for the route is `us`, and the `App id` parameter is `id408709785`. So the route should be [`/apple/apps/update/us/id408709785`](https://rsshub.app/apple/apps/update/us/id408709785).\n:::",
+        "location": "apps.ts",
+        "module": () => import('@/routes/apple/apps.ts')
+      },
       "/design": {
         "categories": [
           "design"
@@ -11018,64 +11076,6 @@ export default {
         },
         "location": "security-releases.ts",
         "module": () => import('@/routes/apple/security-releases.ts')
-      },
-      "/apps/update/:country/:id/:platform?": {
-        "path": "/apps/update/:country/:id/:platform?",
-        "categories": [
-          "program-update"
-        ],
-        "view": 5,
-        "example": "/apple/apps/update/us/id408709785",
-        "parameters": {
-          "country": "App Store Country, obtain from the app URL, see below",
-          "id": "App id, obtain from the app URL",
-          "platform": {
-            "description": "App Platform, see below, all by default",
-            "options": [
-              {
-                "value": "All",
-                "label": "all"
-              },
-              {
-                "value": "iOS",
-                "label": "iOS"
-              },
-              {
-                "value": "macOS",
-                "label": "macOS"
-              },
-              {
-                "value": "tvOS",
-                "label": "tvOS"
-              }
-            ]
-          }
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "apps.apple.com/:country/app/:appSlug/:id",
-              "apps.apple.com/:country/app/:id"
-            ],
-            "target": "/apps/update/:country/:id"
-          }
-        ],
-        "name": "App Update",
-        "maintainers": [
-          "EkkoG",
-          "nczitzk"
-        ],
-        "description": "\n::: tip\n  For example, the URL of [GarageBand](https://apps.apple.com/us/app/garageband/id408709785) in the App Store is `https://apps.apple.com/us/app/garageband/id408709785`. In this case, the `App Store Country` parameter for the route is `us`, and the `App id` parameter is `id408709785`. So the route should be [`/apple/apps/update/us/id408709785`](https://rsshub.app/apple/apps/update/us/id408709785).\n:::",
-        "location": "apps.ts",
-        "module": () => import('@/routes/apple/apps.ts')
       }
     },
     "apiRoutes": {},
@@ -42708,7 +42708,13 @@ export default {
           "keyword": "Keyword, empty by default"
         },
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "FANTIA_COOKIE",
+              "optional": true,
+              "description": "The `cookie` after login can be obtained by viewing the request header in the console, If not filled in will cause some posts that require login to read to get exceptions"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -42735,7 +42741,13 @@ export default {
           "id": "User id, can be found in user profile URL"
         },
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "FANTIA_COOKIE",
+              "optional": true,
+              "description": "The `cookie` after login can be obtained by viewing the request header in the console, If not filled in will cause some posts that require login to read to get exceptions"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -61046,6 +61058,39 @@ export default {
   },
   "huggingface": {
     "routes": {
+      "/activity/:user/likes": {
+        "path": "/activity/:user/likes",
+        "categories": [
+          "programming"
+        ],
+        "example": "/huggingface/activity/dotwee/likes",
+        "parameters": {
+          "user": "Hugging Face username"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "huggingface.co/:user/activity/likes"
+            ],
+            "target": "/activity/:user/likes"
+          }
+        ],
+        "name": "User Likes Activity",
+        "maintainers": [
+          "dotwee"
+        ],
+        "url": "huggingface.co",
+        "location": "user-likes.ts",
+        "module": () => import('@/routes/huggingface/user-likes.ts')
+      },
       "/blog-community/:sort?": {
         "path": "/blog-community/:sort?",
         "categories": [
@@ -67246,7 +67291,8 @@ export default {
         "url": "javdb.com/",
         "description": "分类\n\n| 有碼     | 無碼       | 歐美    |\n| -------- | ---------- | ------- |\n| censored | uncensored | western |\n\n  排序\n\n| 发布日期排序 | 磁鏈更新排序 |\n| ------------ | ------------ |\n| 1            | 2            |\n\n  过滤\n\n| 全部 | 可下载 | 含字幕 | 含短評 |\n| ---- | ------ | ------ | ------ |\n| 0    | 1      | 2      | 3      |",
         "features": {
-          "nsfw": true
+          "nsfw": true,
+          "requirePuppeteer": true
         },
         "location": "index.ts",
         "module": () => import('@/routes/javdb/index.ts')
@@ -81792,6 +81838,34 @@ export default {
     "url": "www.metmuseum.org",
     "lang": "en"
   },
+  "mhlw": {
+    "routes": {
+      "/monthly-labour-survey": {
+        "path": "/monthly-labour-survey",
+        "categories": [
+          "government"
+        ],
+        "example": "/mhlw/monthly-labour-survey",
+        "radar": [
+          {
+            "source": [
+              "www.mhlw.go.jp/toukei/list/30-1a.html"
+            ]
+          }
+        ],
+        "name": "毎月勤労統計調査 全国調査（月別結果）",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.mhlw.go.jp/toukei/list/30-1a.html",
+        "location": "monthly-labour-survey.ts",
+        "module": () => import('@/routes/mhlw/monthly-labour-survey.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "厚生労働省",
+    "url": "www.mhlw.go.jp"
+  },
   "mi": {
     "routes": {
       "/golden": {
@@ -89528,10 +89602,6 @@ export default {
                 "value": "typhoon/typhoon-name/index/html"
               },
               {
-                "label": "台风海洋 - 台风综合信息",
-                "value": "http://typhoon/nmc.cn"
-              },
-              {
                 "label": "全球预报 - 全球天气公报",
                 "value": "quanqiuyubao/quanqiutianqigongbao/index/html"
               },
@@ -89618,7 +89688,7 @@ export default {
             ]
           }
         },
-        "description": "::: tip\n订阅[全国逐时气温](https://www.nmc.cn/publish/observations/hourly-temperature.html)，其源网址为 `https://www.nmc.cn/publish/observations/hourly-temperature.html`，请参考该 URL 指定部分构成参数，此时路由为 [`/nmc/publish/observations/hourly-temperature/html`](https://rsshub.app/nmc/publish/observations/hourly-temperature/html)。\n\n订阅[天气公报](https://www.nmc.cn/publish/weather-bulletin/index.htm)，其源网址为 `https://www.nmc.cn/publish/weather-bulletin/index.htm`，请参考该 URL 指定部分构成参数，此时路由为 [`/nmc/publish/weather-bulletin/index/htm`](https://rsshub.app/nmc/publish/weather-bulletin/index/htm)。\n:::\n\n<details>\n  <summary>更多分类</summary>\n\n  #### [首页](https://www.nmc.cn/)\n\n  | Category                                                                   | ID                                                                                                |\n  | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\n  | [卫星云图](https://www.nmc.cn/publish/satellite/fy4b-visible.htm)          | [satellite/fy4b-visible/htm](https://rsshub.app/nmc/publish/satellite/fy4b-visible/htm)           |\n  | [气象灾害预警](https://www.nmc.cn/publish/country/warning/index.html)      | [country/warning/index/html](https://rsshub.app/nmc/publish/country/warning/index/html)           |\n  | [环境气象公报](https://www.nmc.cn/publish/observations/environmental.html) | [observations/environmental/html](https://rsshub.app/nmc/publish/observations/environmental/html) |\n  | [降水量预报](https://www.nmc.cn/publish/precipitation/1-day.html)          | [precipitation/1-day/html](https://rsshub.app/nmc/publish/precipitation/1-day/html)               |\n  | [天气公报](https://www.nmc.cn/publish/weather-bulletin/index.htm)          | [weather-bulletin/index/htm](https://rsshub.app/nmc/publish/weather-bulletin/index/htm)           |\n  | [每日天气提示](https://www.nmc.cn/publish/weatherperday/index.htm)         | [weatherperday/index/htm](https://rsshub.app/nmc/publish/weatherperday/index/htm)                 |\n  | [城市天气预报](https://www.nmc.cn/publish/forecast.html)                   | [forecast/html](https://rsshub.app/nmc/publish/forecast/html)                                     |\n\n  #### [天气实况](https://www.nmc.cn/publish/observations/hourly-precipitation.html)\n\n  | Category                                                                         | ID                                                                                                                        |\n  | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |\n  | [天气图](https://www.nmc.cn/publish/observations/china/dm/weatherchart-h000.htm) | [observations/china/dm/weatherchart-h000/htm](https://rsshub.app/nmc/publish/observations/china/dm/weatherchart-h000/htm) |\n  | [卫星云图](https://www.nmc.cn/publish/satellite/fy4b-visible.htm)                | [satellite/fy4b-visible/htm](https://rsshub.app/nmc/publish/satellite/fy4b-visible/htm)                                   |\n  | [雷达图](https://www.nmc.cn/publish/radar/chinaall.html)                         | [radar/chinaall/html](https://rsshub.app/nmc/publish/radar/chinaall/html)                                                 |\n  | [降水量](https://www.nmc.cn/publish/observations/hourly-precipitation.html)      | [observations/hourly-precipitation/html](https://rsshub.app/nmc/publish/observations/hourly-precipitation/html)           |\n  | [气温](https://www.nmc.cn/publish/observations/hourly-temperature.html)          | [observations/hourly-temperature/html](https://rsshub.app/nmc/publish/observations/hourly-temperature/html)               |\n  | [风](https://www.nmc.cn/publish/observations/hourly-winds.html)                  | [observations/hourly-winds/html](https://rsshub.app/nmc/publish/observations/hourly-winds/html)                           |\n  | [能见度](https://www.nmc.cn/publish/sea/seaplatform1.html)                       | [sea/seaplatform1/html](https://rsshub.app/nmc/publish/sea/seaplatform1/html)                                             |\n  | [强对流](https://www.nmc.cn/publish/observations/lighting.html)                  | [observations/lighting/html](https://rsshub.app/nmc/publish/observations/lighting/html)                                   |\n  | [土壤水分](https://www.nmc.cn/publish/soil-moisture/10cm.html)                   | [soil-moisture/10cm/html](https://rsshub.app/nmc/publish/soil-moisture/10cm/html)                                         |\n\n  #### [城市预报](https://www.nmc.cn/publish/forecast.html)\n\n  | Category                                             | ID                                                            |\n  | ---------------------------------------------------- | ------------------------------------------------------------- |\n  | [城市预报](https://www.nmc.cn/publish/forecast.html) | [forecast/html](https://rsshub.app/nmc/publish/forecast/html) |\n\n  #### [天气预报](https://www.nmc.cn/publish/weather-bulletin/index.htm)\n\n  | Category                                                                                                        | ID                                                                                                                                                      |\n  | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [天气公报](https://www.nmc.cn/publish/weather-bulletin/index.htm)                                               | [weather-bulletin/index/htm](https://rsshub.app/nmc/publish/weather-bulletin/index/htm)                                                                 |\n  | [每日天气提示](https://www.nmc.cn/publish/weatherperday/index.htm)                                              | [weatherperday/index/htm](https://rsshub.app/nmc/publish/weatherperday/index/htm)                                                                       |\n  | [春运气象服务专报](https://www.nmc.cn/publish/weather_forecast/swssr.htm)                                       | [weather_forecast/swssr/htm](https://rsshub.app/nmc/publish/weather_forecast/swssr/htm)                                                                 |\n  | [气象灾害预警](https://www.nmc.cn/publish/country/warning/fog.html)                                             | [country/warning/fog/html](https://rsshub.app/nmc/publish/country/warning/fog/html)                                                                     |\n  | [重要天气提示](https://www.nmc.cn/publish/news/weather_new.html)                                                | [news/weather_new/html](https://rsshub.app/nmc/publish/news/weather_new/html)                                                                           |\n  | [重要天气盘点](https://www.nmc.cn/publish/tianqiyubao/zhongyaotianqipandian/index.html)                         | [tianqiyubao/zhongyaotianqipandian/index/html](https://rsshub.app/nmc/publish/tianqiyubao/zhongyaotianqipandian/index/html)                             |\n  | [降水量预报](https://www.nmc.cn/publish/precipitation/1-day.html)                                               | [precipitation/1-day/html](https://rsshub.app/nmc/publish/precipitation/1-day/html)                                                                     |\n  | [冻雨预报](https://www.nmc.cn/publish/tianqiyubao/dongyuyubao/index.html)                                       | [tianqiyubao/dongyuyubao/index/html](https://rsshub.app/nmc/publish/tianqiyubao/dongyuyubao/index/html)                                                 |\n  | [气温预报](https://www.nmc.cn/publish/temperature/hight/24hour.html)                                            | [temperature/hight/24hour/html](https://rsshub.app/nmc/publish/temperature/hight/24hour/html)                                                           |\n  | [大风预报](https://www.nmc.cn/publish/wind/24h.html)                                                            | [wind/24h/html](https://rsshub.app/nmc/publish/wind/24h/html)                                                                                           |\n  | [强对流天气预报](https://www.nmc.cn/publish/bulletin/swpc.html)                                                 | [bulletin/swpc/html](https://rsshub.app/nmc/publish/bulletin/swpc/html)                                                                                 |\n  | [中期天气](https://www.nmc.cn/publish/bulletin/mid-range.htm)                                                   | [bulletin/mid-range/htm](https://rsshub.app/nmc/publish/bulletin/mid-range/htm)                                                                         |\n  | [全球天气预报](https://www.nmc.cn/publish/bulletin/abroadweather.html)                                          | [bulletin/abroadweather/html](https://rsshub.app/nmc/publish/bulletin/abroadweather/html)                                                               |\n  | [全球灾害性天气监测月报](https://www.nmc.cn/publish/tianqiyubao/quanqiuzaihaixingtianqijianceyuebao/index.html) | [tianqiyubao/quanqiuzaihaixingtianqijianceyuebao/index/html](https://rsshub.app/nmc/publish/tianqiyubao/quanqiuzaihaixingtianqijianceyuebao/index/html) |\n  | [环境气象公报](https://www.nmc.cn/publish/observations/environmental.html)                                      | [observations/environmental/html](https://rsshub.app/nmc/publish/observations/environmental/html)                                                       |\n  | [山洪灾害气象预警](https://www.nmc.cn/publish/mountainflood.html)                                               | [mountainflood/html](https://rsshub.app/nmc/publish/mountainflood/html)                                                                                 |\n  | [地质灾害气象风险预警](https://www.nmc.cn/publish/geohazard.html)                                               | [geohazard/html](https://rsshub.app/nmc/publish/geohazard/html)                                                                                         |\n  | [中小河流洪水气象风险预警](https://www.nmc.cn/publish/swdz/zxhlhsqxyj.html)                                     | [swdz/zxhlhsqxyj/html](https://rsshub.app/nmc/publish/swdz/zxhlhsqxyj/html)                                                                             |\n  | [渍涝风险气象预警](https://www.nmc.cn/publish/waterlogging.html)                                                | [waterlogging/html](https://rsshub.app/nmc/publish/waterlogging/html)                                                                                   |\n  | [交通气象预报](https://www.nmc.cn/publish/traffic.html)                                                         | [traffic/html](https://rsshub.app/nmc/publish/traffic/html)                                                                                             |\n  | [森林火险预报](https://www.nmc.cn/publish/environment/forestfire-doc.html)                                      | [environment/forestfire-doc/html](https://rsshub.app/nmc/publish/environment/forestfire-doc/html)                                                       |\n  | [草原火险预报](https://www.nmc.cn/publish/environment/glassland-fire.html)                                      | [environment/glassland-fire/html](https://rsshub.app/nmc/publish/environment/glassland-fire/html)                                                       |\n\n  #### [台风海洋](https://www.nmc.cn/publish/typhoon/typhoon_new.html)\n\n  | Category                                                                              | ID                                                                                                                      |\n  | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |\n  | [台风快讯与报文](https://www.nmc.cn/publish/typhoon/typhoon_new.html)                 | [typhoon/typhoon_new/html](https://rsshub.app/nmc/publish/typhoon/typhoon_new/html)                                     |\n  | [台风路径预报](https://www.nmc.cn/publish/typhoon/probability-img2.html)              | [typhoon/probability-img2/html](https://rsshub.app/nmc/publish/typhoon/probability-img2/html)                           |\n  | [台风公报](https://www.nmc.cn/publish/typhoon/warning.html)                           | [typhoon/warning/html](https://rsshub.app/nmc/publish/typhoon/warning/html)                                             |\n  | [台风预警](https://www.nmc.cn/publish/typhoon/warning_index.html)                     | [typhoon/warning_index/html](https://rsshub.app/nmc/publish/typhoon/warning_index/html)                                 |\n  | [海区预报](https://www.nmc.cn/publish/marine/newcoastal.html)                         | [marine/newcoastal/html](https://rsshub.app/nmc/publish/marine/newcoastal/html)                                         |\n  | [海事公报](https://www.nmc.cn/publish/marine/maritime.html)                           | [marine/maritime/html](https://rsshub.app/nmc/publish/marine/maritime/html)                                             |\n  | [海洋天气预报](https://www.nmc.cn/publish/marine/forecast.htm)                        | [marine/forecast/htm](https://rsshub.app/nmc/publish/marine/forecast/htm)                                               |\n  | [近海海雾预报](https://www.nmc.cn/publish/taifenghaiyang/jinhaihaiwuyubao/index.html) | [taifenghaiyang/jinhaihaiwuyubao/index/html](https://rsshub.app/nmc/publish/taifenghaiyang/jinhaihaiwuyubao/index/html) |\n  | [海区风力预报](https://www.nmc.cn/publish/taifenghaiyang/haiqufengliyubao/index.html) | [taifenghaiyang/haiqufengliyubao/index/html](https://rsshub.app/nmc/publish/taifenghaiyang/haiqufengliyubao/index/html) |\n  | [北太平洋分析与预报](https://www.nmc.cn/publish/marine/h000.html)                     | [marine/h000/html](https://rsshub.app/nmc/publish/marine/h000/html)                                                     |\n  | [全球热带气旋监测公报](https://www.nmc.cn/publish/typhoon/totalcyclone.htm)           | [typhoon/totalcyclone/htm](https://rsshub.app/nmc/publish/typhoon/totalcyclone/htm)                                     |\n  | [台风命名](https://www.nmc.cn/publish/typhoon/typhoon-name/index.html)                | [typhoon/typhoon-name/index/html](https://rsshub.app/nmc/publish/typhoon/typhoon-name/index/html)                       |\n  | [台风综合信息](http://typhoon.nmc.cn)                                                 | [http://typhoon/nmc.cn](https://rsshub.app/nmc/publish/http://typhoon/nmc.cn)                                           |\n\n  #### [全球预报](https://www.nmc.cn/publish/quanqiuyubao/quanqiutianqigongbao/index.html)\n\n  | Category                                                                                                         | ID                                                                                                                                                                |\n  | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [全球天气公报](https://www.nmc.cn/publish/quanqiuyubao/quanqiutianqigongbao/index.html)                          | [quanqiuyubao/quanqiutianqigongbao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiutianqigongbao/index/html)                                       |\n  | [全球热带气旋监测公报](https://www.nmc.cn/publish/quanqiuyubao/quanqiuredaiqixuanjiancegongbao/index.html)       | [quanqiuyubao/quanqiuredaiqixuanjiancegongbao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiuredaiqixuanjiancegongbao/index/html)                 |\n  | [WMO第XI海区海事天气公报](https://www.nmc.cn/publish/quanqiuyubao/WMOdiXIhaiquhaishitianqigongbao/index.html)    | [quanqiuyubao/WMOdiXIhaiquhaishitianqigongbao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/WMOdiXIhaiquhaishitianqigongbao/index/html)                 |\n  | [全球灾害性天气监测月报](https://www.nmc.cn/publish/quanqiuyubao/quanqiuzaihaixingtianqijianceyuebao/index.html) | [quanqiuyubao/quanqiuzaihaixingtianqijianceyuebao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiuzaihaixingtianqijianceyuebao/index/html)         |\n  | [全球雨雪落区预报](https://www.nmc.cn/publish/quanqiuyubao/quanqiuyuxueluoquyubao/yazhou/24xiaoshi/index.html)   | [quanqiuyubao/quanqiuyuxueluoquyubao/yazhou/24xiaoshi/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiuyuxueluoquyubao/yazhou/24xiaoshi/index/html) |\n\n  #### [环境气象](https://www.nmc.cn/publish/fog.html)\n\n  | Category                                                                                                 | ID                                                                                                                                                    |\n  | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [雾预报](https://www.nmc.cn/publish/fog.html)                                                            | [fog/html](https://rsshub.app/nmc/publish/fog/html)                                                                                                   |\n  | [霾预报](https://www.nmc.cn/publish/haze.html)                                                           | [haze/html](https://rsshub.app/nmc/publish/haze/html)                                                                                                 |\n  | [沙尘天气预报](https://www.nmc.cn/publish/severeweather/dust.html)                                       | [severeweather/dust/html](https://rsshub.app/nmc/publish/severeweather/dust/html)                                                                     |\n  | [空气污染气象条件预报](https://www.nmc.cn/publish/environment/air_pollution-24.html)                     | [environment/air_pollution-24/html](https://rsshub.app/nmc/publish/environment/air_pollution-24/html)                                                 |\n  | [环境气象公报](https://www.nmc.cn/publish/observations/environmental.html)                               | [observations/environmental/html](https://rsshub.app/nmc/publish/observations/environmental/html)                                                     |\n  | [大气环境气象公报](https://www.nmc.cn/publish/environment/National-Bulletin-atmospheric-environment.htm) | [environment/National-Bulletin-atmospheric-environment/htm](https://rsshub.app/nmc/publish/environment/National-Bulletin-atmospheric-environment/htm) |\n\n  #### [农业气象](https://www.nmc.cn/publish/agro/soil-moisture-monitoring-10cm.html)\n\n  | Category                                                                                                                 | ID                                                                                                                                                                                    |\n  | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [土壤水分监测](https://www.nmc.cn/publish/agro/soil-moisture-monitoring-10cm.html)                                       | [agro/soil-moisture-monitoring-10cm/html](https://rsshub.app/nmc/publish/agro/soil-moisture-monitoring-10cm/html)                                                                     |\n  | [农业干旱综合监测](https://www.nmc.cn/publish/agro/disastersmonitoring/Agricultural_Drought_Monitoring.htm)              | [agro/disastersmonitoring/Agricultural_Drought_Monitoring/htm](https://rsshub.app/nmc/publish/agro/disastersmonitoring/Agricultural_Drought_Monitoring/htm)                           |\n  | [关键农时农事](https://www.nmc.cn/publish/agro/weatherservices/harvest_in_autumn.html)                                   | [agro/weatherservices/harvest_in_autumn/html](https://rsshub.app/nmc/publish/agro/weatherservices/harvest_in_autumn/html)                                                             |\n  | [农业气象周报](https://www.nmc.cn/publish/agro/ten-week/index.html)                                                      | [agro/ten-week/index/html](https://rsshub.app/nmc/publish/agro/ten-week/index/html)                                                                                                   |\n  | [农业气象月报](https://www.nmc.cn/publish/agro/monthly/index.html)                                                       | [agro/monthly/index/html](https://rsshub.app/nmc/publish/agro/monthly/index/html)                                                                                                     |\n  | [生态气象监测评估](https://www.nmc.cn/publish/nongyeqixiang/shengtaiqixiangjiance/caodishengtaiqixiangjiance/index.html) | [nongyeqixiang/shengtaiqixiangjiance/caodishengtaiqixiangjiance/index/html](https://rsshub.app/nmc/publish/nongyeqixiang/shengtaiqixiangjiance/caodishengtaiqixiangjiance/index/html) |\n  | [农业气象专报](https://www.nmc.cn/publish/crop/index.htm)                                                                | [crop/index/htm](https://rsshub.app/nmc/publish/crop/index/htm)                                                                                                                       |\n  | [作物发育期监测](https://www.nmc.cn/publish/agro/information/winter-wheat.html)                                          | [agro/information/winter-wheat/html](https://rsshub.app/nmc/publish/agro/information/winter-wheat/html)                                                                               |\n  | [农业气象灾害风险预警](https://www.nmc.cn/publish/nongyeqixiang/quanguonongyeqixiangzaihaifengxianyujing/index.html)     | [nongyeqixiang/quanguonongyeqixiangzaihaifengxianyujing/index/html](https://rsshub.app/nmc/publish/nongyeqixiang/quanguonongyeqixiangzaihaifengxianyujing/index/html)                 |\n  | [国外农业气象月报](https://www.nmc.cn/publish/nongyeqixiang/guowainongyeqixiangyuebao/index.html)                        | [nongyeqixiang/guowainongyeqixiangyuebao/index/html](https://rsshub.app/nmc/publish/nongyeqixiang/guowainongyeqixiangyuebao/index/html)                                               |\n\n</details>\n",
+        "description": "::: tip\n订阅[全国逐时气温](https://www.nmc.cn/publish/observations/hourly-temperature.html)，其源网址为 `https://www.nmc.cn/publish/observations/hourly-temperature.html`，请参考该 URL 指定部分构成参数，此时路由为 [`/nmc/publish/observations/hourly-temperature/html`](https://rsshub.app/nmc/publish/observations/hourly-temperature/html)。\n\n订阅[天气公报](https://www.nmc.cn/publish/weather-bulletin/index.htm)，其源网址为 `https://www.nmc.cn/publish/weather-bulletin/index.htm`，请参考该 URL 指定部分构成参数，此时路由为 [`/nmc/publish/weather-bulletin/index/htm`](https://rsshub.app/nmc/publish/weather-bulletin/index/htm)。\n:::\n\n<details>\n  <summary>更多分类</summary>\n\n  #### [首页](https://www.nmc.cn/)\n\n  | Category                                                                   | ID                                                                                                |\n  | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |\n  | [卫星云图](https://www.nmc.cn/publish/satellite/fy4b-visible.htm)          | [satellite/fy4b-visible/htm](https://rsshub.app/nmc/publish/satellite/fy4b-visible/htm)           |\n  | [气象灾害预警](https://www.nmc.cn/publish/country/warning/index.html)      | [country/warning/index/html](https://rsshub.app/nmc/publish/country/warning/index/html)           |\n  | [环境气象公报](https://www.nmc.cn/publish/observations/environmental.html) | [observations/environmental/html](https://rsshub.app/nmc/publish/observations/environmental/html) |\n  | [降水量预报](https://www.nmc.cn/publish/precipitation/1-day.html)          | [precipitation/1-day/html](https://rsshub.app/nmc/publish/precipitation/1-day/html)               |\n  | [天气公报](https://www.nmc.cn/publish/weather-bulletin/index.htm)          | [weather-bulletin/index/htm](https://rsshub.app/nmc/publish/weather-bulletin/index/htm)           |\n  | [每日天气提示](https://www.nmc.cn/publish/weatherperday/index.htm)         | [weatherperday/index/htm](https://rsshub.app/nmc/publish/weatherperday/index/htm)                 |\n  | [城市天气预报](https://www.nmc.cn/publish/forecast.html)                   | [forecast/html](https://rsshub.app/nmc/publish/forecast/html)                                     |\n\n  #### [天气实况](https://www.nmc.cn/publish/observations/hourly-precipitation.html)\n\n  | Category                                                                         | ID                                                                                                                        |\n  | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |\n  | [天气图](https://www.nmc.cn/publish/observations/china/dm/weatherchart-h000.htm) | [observations/china/dm/weatherchart-h000/htm](https://rsshub.app/nmc/publish/observations/china/dm/weatherchart-h000/htm) |\n  | [卫星云图](https://www.nmc.cn/publish/satellite/fy4b-visible.htm)                | [satellite/fy4b-visible/htm](https://rsshub.app/nmc/publish/satellite/fy4b-visible/htm)                                   |\n  | [雷达图](https://www.nmc.cn/publish/radar/chinaall.html)                         | [radar/chinaall/html](https://rsshub.app/nmc/publish/radar/chinaall/html)                                                 |\n  | [降水量](https://www.nmc.cn/publish/observations/hourly-precipitation.html)      | [observations/hourly-precipitation/html](https://rsshub.app/nmc/publish/observations/hourly-precipitation/html)           |\n  | [气温](https://www.nmc.cn/publish/observations/hourly-temperature.html)          | [observations/hourly-temperature/html](https://rsshub.app/nmc/publish/observations/hourly-temperature/html)               |\n  | [风](https://www.nmc.cn/publish/observations/hourly-winds.html)                  | [observations/hourly-winds/html](https://rsshub.app/nmc/publish/observations/hourly-winds/html)                           |\n  | [能见度](https://www.nmc.cn/publish/sea/seaplatform1.html)                       | [sea/seaplatform1/html](https://rsshub.app/nmc/publish/sea/seaplatform1/html)                                             |\n  | [强对流](https://www.nmc.cn/publish/observations/lighting.html)                  | [observations/lighting/html](https://rsshub.app/nmc/publish/observations/lighting/html)                                   |\n  | [土壤水分](https://www.nmc.cn/publish/soil-moisture/10cm.html)                   | [soil-moisture/10cm/html](https://rsshub.app/nmc/publish/soil-moisture/10cm/html)                                         |\n\n  #### [城市预报](https://www.nmc.cn/publish/forecast.html)\n\n  | Category                                             | ID                                                            |\n  | ---------------------------------------------------- | ------------------------------------------------------------- |\n  | [城市预报](https://www.nmc.cn/publish/forecast.html) | [forecast/html](https://rsshub.app/nmc/publish/forecast/html) |\n\n  #### [天气预报](https://www.nmc.cn/publish/weather-bulletin/index.htm)\n\n  | Category                                                                                                        | ID                                                                                                                                                      |\n  | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [天气公报](https://www.nmc.cn/publish/weather-bulletin/index.htm)                                               | [weather-bulletin/index/htm](https://rsshub.app/nmc/publish/weather-bulletin/index/htm)                                                                 |\n  | [每日天气提示](https://www.nmc.cn/publish/weatherperday/index.htm)                                              | [weatherperday/index/htm](https://rsshub.app/nmc/publish/weatherperday/index/htm)                                                                       |\n  | [春运气象服务专报](https://www.nmc.cn/publish/weather_forecast/swssr.htm)                                       | [weather_forecast/swssr/htm](https://rsshub.app/nmc/publish/weather_forecast/swssr/htm)                                                                 |\n  | [气象灾害预警](https://www.nmc.cn/publish/country/warning/fog.html)                                             | [country/warning/fog/html](https://rsshub.app/nmc/publish/country/warning/fog/html)                                                                     |\n  | [重要天气提示](https://www.nmc.cn/publish/news/weather_new.html)                                                | [news/weather_new/html](https://rsshub.app/nmc/publish/news/weather_new/html)                                                                           |\n  | [重要天气盘点](https://www.nmc.cn/publish/tianqiyubao/zhongyaotianqipandian/index.html)                         | [tianqiyubao/zhongyaotianqipandian/index/html](https://rsshub.app/nmc/publish/tianqiyubao/zhongyaotianqipandian/index/html)                             |\n  | [降水量预报](https://www.nmc.cn/publish/precipitation/1-day.html)                                               | [precipitation/1-day/html](https://rsshub.app/nmc/publish/precipitation/1-day/html)                                                                     |\n  | [冻雨预报](https://www.nmc.cn/publish/tianqiyubao/dongyuyubao/index.html)                                       | [tianqiyubao/dongyuyubao/index/html](https://rsshub.app/nmc/publish/tianqiyubao/dongyuyubao/index/html)                                                 |\n  | [气温预报](https://www.nmc.cn/publish/temperature/hight/24hour.html)                                            | [temperature/hight/24hour/html](https://rsshub.app/nmc/publish/temperature/hight/24hour/html)                                                           |\n  | [大风预报](https://www.nmc.cn/publish/wind/24h.html)                                                            | [wind/24h/html](https://rsshub.app/nmc/publish/wind/24h/html)                                                                                           |\n  | [强对流天气预报](https://www.nmc.cn/publish/bulletin/swpc.html)                                                 | [bulletin/swpc/html](https://rsshub.app/nmc/publish/bulletin/swpc/html)                                                                                 |\n  | [中期天气](https://www.nmc.cn/publish/bulletin/mid-range.htm)                                                   | [bulletin/mid-range/htm](https://rsshub.app/nmc/publish/bulletin/mid-range/htm)                                                                         |\n  | [全球天气预报](https://www.nmc.cn/publish/bulletin/abroadweather.html)                                          | [bulletin/abroadweather/html](https://rsshub.app/nmc/publish/bulletin/abroadweather/html)                                                               |\n  | [全球灾害性天气监测月报](https://www.nmc.cn/publish/tianqiyubao/quanqiuzaihaixingtianqijianceyuebao/index.html) | [tianqiyubao/quanqiuzaihaixingtianqijianceyuebao/index/html](https://rsshub.app/nmc/publish/tianqiyubao/quanqiuzaihaixingtianqijianceyuebao/index/html) |\n  | [环境气象公报](https://www.nmc.cn/publish/observations/environmental.html)                                      | [observations/environmental/html](https://rsshub.app/nmc/publish/observations/environmental/html)                                                       |\n  | [山洪灾害气象预警](https://www.nmc.cn/publish/mountainflood.html)                                               | [mountainflood/html](https://rsshub.app/nmc/publish/mountainflood/html)                                                                                 |\n  | [地质灾害气象风险预警](https://www.nmc.cn/publish/geohazard.html)                                               | [geohazard/html](https://rsshub.app/nmc/publish/geohazard/html)                                                                                         |\n  | [中小河流洪水气象风险预警](https://www.nmc.cn/publish/swdz/zxhlhsqxyj.html)                                     | [swdz/zxhlhsqxyj/html](https://rsshub.app/nmc/publish/swdz/zxhlhsqxyj/html)                                                                             |\n  | [渍涝风险气象预警](https://www.nmc.cn/publish/waterlogging.html)                                                | [waterlogging/html](https://rsshub.app/nmc/publish/waterlogging/html)                                                                                   |\n  | [交通气象预报](https://www.nmc.cn/publish/traffic.html)                                                         | [traffic/html](https://rsshub.app/nmc/publish/traffic/html)                                                                                             |\n  | [森林火险预报](https://www.nmc.cn/publish/environment/forestfire-doc.html)                                      | [environment/forestfire-doc/html](https://rsshub.app/nmc/publish/environment/forestfire-doc/html)                                                       |\n  | [草原火险预报](https://www.nmc.cn/publish/environment/glassland-fire.html)                                      | [environment/glassland-fire/html](https://rsshub.app/nmc/publish/environment/glassland-fire/html)                                                       |\n\n  #### [台风海洋](https://www.nmc.cn/publish/typhoon/typhoon_new.html)\n\n  | Category                                                                              | ID                                                                                                                      |\n  | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |\n  | [台风快讯与报文](https://www.nmc.cn/publish/typhoon/typhoon_new.html)                 | [typhoon/typhoon_new/html](https://rsshub.app/nmc/publish/typhoon/typhoon_new/html)                                     |\n  | [台风路径预报](https://www.nmc.cn/publish/typhoon/probability-img2.html)              | [typhoon/probability-img2/html](https://rsshub.app/nmc/publish/typhoon/probability-img2/html)                           |\n  | [台风公报](https://www.nmc.cn/publish/typhoon/warning.html)                           | [typhoon/warning/html](https://rsshub.app/nmc/publish/typhoon/warning/html)                                             |\n  | [台风预警](https://www.nmc.cn/publish/typhoon/warning_index.html)                     | [typhoon/warning_index/html](https://rsshub.app/nmc/publish/typhoon/warning_index/html)                                 |\n  | [海区预报](https://www.nmc.cn/publish/marine/newcoastal.html)                         | [marine/newcoastal/html](https://rsshub.app/nmc/publish/marine/newcoastal/html)                                         |\n  | [海事公报](https://www.nmc.cn/publish/marine/maritime.html)                           | [marine/maritime/html](https://rsshub.app/nmc/publish/marine/maritime/html)                                             |\n  | [海洋天气预报](https://www.nmc.cn/publish/marine/forecast.htm)                        | [marine/forecast/htm](https://rsshub.app/nmc/publish/marine/forecast/htm)                                               |\n  | [近海海雾预报](https://www.nmc.cn/publish/taifenghaiyang/jinhaihaiwuyubao/index.html) | [taifenghaiyang/jinhaihaiwuyubao/index/html](https://rsshub.app/nmc/publish/taifenghaiyang/jinhaihaiwuyubao/index/html) |\n  | [海区风力预报](https://www.nmc.cn/publish/taifenghaiyang/haiqufengliyubao/index.html) | [taifenghaiyang/haiqufengliyubao/index/html](https://rsshub.app/nmc/publish/taifenghaiyang/haiqufengliyubao/index/html) |\n  | [北太平洋分析与预报](https://www.nmc.cn/publish/marine/h000.html)                     | [marine/h000/html](https://rsshub.app/nmc/publish/marine/h000/html)                                                     |\n  | [全球热带气旋监测公报](https://www.nmc.cn/publish/typhoon/totalcyclone.htm)           | [typhoon/totalcyclone/htm](https://rsshub.app/nmc/publish/typhoon/totalcyclone/htm)                                     |\n  | [台风命名](https://www.nmc.cn/publish/typhoon/typhoon-name/index.html)                | [typhoon/typhoon-name/index/html](https://rsshub.app/nmc/publish/typhoon/typhoon-name/index/html)                       |\n\n  #### [全球预报](https://www.nmc.cn/publish/quanqiuyubao/quanqiutianqigongbao/index.html)\n\n  | Category                                                                                                         | ID                                                                                                                                                                |\n  | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [全球天气公报](https://www.nmc.cn/publish/quanqiuyubao/quanqiutianqigongbao/index.html)                          | [quanqiuyubao/quanqiutianqigongbao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiutianqigongbao/index/html)                                       |\n  | [全球热带气旋监测公报](https://www.nmc.cn/publish/quanqiuyubao/quanqiuredaiqixuanjiancegongbao/index.html)       | [quanqiuyubao/quanqiuredaiqixuanjiancegongbao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiuredaiqixuanjiancegongbao/index/html)                 |\n  | [WMO第XI海区海事天气公报](https://www.nmc.cn/publish/quanqiuyubao/WMOdiXIhaiquhaishitianqigongbao/index.html)    | [quanqiuyubao/WMOdiXIhaiquhaishitianqigongbao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/WMOdiXIhaiquhaishitianqigongbao/index/html)                 |\n  | [全球灾害性天气监测月报](https://www.nmc.cn/publish/quanqiuyubao/quanqiuzaihaixingtianqijianceyuebao/index.html) | [quanqiuyubao/quanqiuzaihaixingtianqijianceyuebao/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiuzaihaixingtianqijianceyuebao/index/html)         |\n  | [全球雨雪落区预报](https://www.nmc.cn/publish/quanqiuyubao/quanqiuyuxueluoquyubao/yazhou/24xiaoshi/index.html)   | [quanqiuyubao/quanqiuyuxueluoquyubao/yazhou/24xiaoshi/index/html](https://rsshub.app/nmc/publish/quanqiuyubao/quanqiuyuxueluoquyubao/yazhou/24xiaoshi/index/html) |\n\n  #### [环境气象](https://www.nmc.cn/publish/fog.html)\n\n  | Category                                                                                                 | ID                                                                                                                                                    |\n  | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [雾预报](https://www.nmc.cn/publish/fog.html)                                                            | [fog/html](https://rsshub.app/nmc/publish/fog/html)                                                                                                   |\n  | [霾预报](https://www.nmc.cn/publish/haze.html)                                                           | [haze/html](https://rsshub.app/nmc/publish/haze/html)                                                                                                 |\n  | [沙尘天气预报](https://www.nmc.cn/publish/severeweather/dust.html)                                       | [severeweather/dust/html](https://rsshub.app/nmc/publish/severeweather/dust/html)                                                                     |\n  | [空气污染气象条件预报](https://www.nmc.cn/publish/environment/air_pollution-24.html)                     | [environment/air_pollution-24/html](https://rsshub.app/nmc/publish/environment/air_pollution-24/html)                                                 |\n  | [环境气象公报](https://www.nmc.cn/publish/observations/environmental.html)                               | [observations/environmental/html](https://rsshub.app/nmc/publish/observations/environmental/html)                                                     |\n  | [大气环境气象公报](https://www.nmc.cn/publish/environment/National-Bulletin-atmospheric-environment.htm) | [environment/National-Bulletin-atmospheric-environment/htm](https://rsshub.app/nmc/publish/environment/National-Bulletin-atmospheric-environment/htm) |\n\n  #### [农业气象](https://www.nmc.cn/publish/agro/soil-moisture-monitoring-10cm.html)\n\n  | Category                                                                                                                 | ID                                                                                                                                                                                    |\n  | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n  | [土壤水分监测](https://www.nmc.cn/publish/agro/soil-moisture-monitoring-10cm.html)                                       | [agro/soil-moisture-monitoring-10cm/html](https://rsshub.app/nmc/publish/agro/soil-moisture-monitoring-10cm/html)                                                                     |\n  | [农业干旱综合监测](https://www.nmc.cn/publish/agro/disastersmonitoring/Agricultural_Drought_Monitoring.htm)              | [agro/disastersmonitoring/Agricultural_Drought_Monitoring/htm](https://rsshub.app/nmc/publish/agro/disastersmonitoring/Agricultural_Drought_Monitoring/htm)                           |\n  | [关键农时农事](https://www.nmc.cn/publish/agro/weatherservices/harvest_in_autumn.html)                                   | [agro/weatherservices/harvest_in_autumn/html](https://rsshub.app/nmc/publish/agro/weatherservices/harvest_in_autumn/html)                                                             |\n  | [农业气象周报](https://www.nmc.cn/publish/agro/ten-week/index.html)                                                      | [agro/ten-week/index/html](https://rsshub.app/nmc/publish/agro/ten-week/index/html)                                                                                                   |\n  | [农业气象月报](https://www.nmc.cn/publish/agro/monthly/index.html)                                                       | [agro/monthly/index/html](https://rsshub.app/nmc/publish/agro/monthly/index/html)                                                                                                     |\n  | [生态气象监测评估](https://www.nmc.cn/publish/nongyeqixiang/shengtaiqixiangjiance/caodishengtaiqixiangjiance/index.html) | [nongyeqixiang/shengtaiqixiangjiance/caodishengtaiqixiangjiance/index/html](https://rsshub.app/nmc/publish/nongyeqixiang/shengtaiqixiangjiance/caodishengtaiqixiangjiance/index/html) |\n  | [农业气象专报](https://www.nmc.cn/publish/crop/index.htm)                                                                | [crop/index/htm](https://rsshub.app/nmc/publish/crop/index/htm)                                                                                                                       |\n  | [作物发育期监测](https://www.nmc.cn/publish/agro/information/winter-wheat.html)                                          | [agro/information/winter-wheat/html](https://rsshub.app/nmc/publish/agro/information/winter-wheat/html)                                                                               |\n  | [农业气象灾害风险预警](https://www.nmc.cn/publish/nongyeqixiang/quanguonongyeqixiangzaihaifengxianyujing/index.html)     | [nongyeqixiang/quanguonongyeqixiangzaihaifengxianyujing/index/html](https://rsshub.app/nmc/publish/nongyeqixiang/quanguonongyeqixiangzaihaifengxianyujing/index/html)                 |\n  | [国外农业气象月报](https://www.nmc.cn/publish/nongyeqixiang/guowainongyeqixiangyuebao/index.html)                        | [nongyeqixiang/guowainongyeqixiangyuebao/index/html](https://rsshub.app/nmc/publish/nongyeqixiang/guowainongyeqixiangyuebao/index/html)                                               |\n\n</details>\n",
         "categories": [
           "forecast"
         ],
@@ -89993,13 +90063,6 @@ export default {
               "www.nmc.cn/publish/typhoon/typhoon-name/index.html"
             ],
             "target": "/publish/typhoon/typhoon-name/index/html"
-          },
-          {
-            "title": "台风海洋 - 台风综合信息",
-            "source": [
-              "typhoon.nmc.cn"
-            ],
-            "target": "/publish/http://typhoon/nmc.cn"
           },
           {
             "title": "全球预报 - 全球天气公报",
@@ -105043,6 +105106,45 @@ export default {
       "name": "中国人民大学"
     },
     "lang": "zh-CN"
+  },
+  "rule34video": {
+    "routes": {
+      "/latest": {
+        "path": "/latest",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/rule34video/latest",
+        "description": "Latest updates from Rule34 Video",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "rule34video.com/latest-updates/"
+            ],
+            "target": "/latest"
+          }
+        ],
+        "name": "Latest Updates",
+        "maintainers": [
+          "ashi-koki"
+        ],
+        "location": "latest.ts",
+        "module": () => import('@/routes/rule34video/latest.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "Rule34Video",
+    "url": "rule34video.com",
+    "lang": "en"
   },
   "runyeah": {
     "routes": {
@@ -135120,10 +135222,10 @@ export default {
           "williamgateszhao"
         ],
         "url": "news.yahoo.com/",
-        "description": "\n`Region`\n\nSupport all regions represented by the asterisk (*) in *.news.yahoo.com, such as hk/tw/au/ca/fr/malaysia/nz/sg/uk/en(us). For www.yahoo.com, use en or us. Sites with news domains other than *.news.yahoo.com, such as de.nachrichten.yahoo.com or news.yahoo.co.jp, are not supported.\n\n`Category`\n\nThe parsing method for Yahoo Hong Kong and Taiwan is quite unique. All supported categories are as follows\n\nCategory for hk.news.yahoo.com (hongkong)\n\n| 全部     | 港聞      | 兩岸國際 | 財經      | 娛樂          | 體育   | 健康   | 親子       | 副刊       |\n| ------- | --------- | -------- | -------- | ------------- | ------ | ------ | --------- | ---------- |\n| (empty) | hong-kong | world    | business | entertainment | sports | health | parenting | supplement |\n\nCategory for tw.news.yahoo.com (taiwan)\n\n| 全部     | 政治     | 財經    | 娛樂          | 運動    | 社會地方 | 國際   | 生活      | 健康   | 科技        | 品味  |\n| ------- | -------- | ------- | ------------- | ------ | -------- | ----- | --------- | ------ | ---------- | ----- |\n| (empty) | politics | finance | entertainment | sports | society  | world | lifestyle | health | technology | style |\n\nOther Yahoo news is fetched from the RSS provided by Yahoo. Please refer to the categories displayed on the pages of *.news.yahoo.com (for example, \"world\"), and try to access *.news.yahoo.com/rss/world to see if it is accessible and contains recent news (some categories exist but are not updated). If it is accessible and has recent news, then that category can be used on the corresponding site. For example, the available categories for news.yahoo.com are as follows\n\nCategory for news.yahoo.com (US)\n\n| All     | US | Politics | World | Science | Tech |\n| ------- | -- | -------- | ----- | ------- | ---- |\n| (empty) | us | politics | world | science | tech |\n\nTo give another example, since uk.news.yahoo.com/rss/ukoriginal is accessible and has recent news, /yahoo/news/uk/ukoriginal is a valid RSSHub route.\n\n`author`\n\nFor Yahoo Hong Kong and Yahoo Taiwan, please use another \"news source\" route.\n\nFor other Yahoo News, this route's RSS provides the author field. You can use RSSHub's built-in \"content filtering\" feature. For example, /yahoo-wg/news/tw/technology?filter_author=Yahoo%20Tech|Engadget can filter out news with authors containing Yahoo Tech or Engadget from Yahoo Taiwan's technology news, which is the Chinese version of Engadget.\n",
+        "description": "\n`Region`\n\nSupport all regions represented by the asterisk (*) in *.news.yahoo.com, such as hk/tw/au/ca/fr/malaysia/nz/sg/uk/en(us). For www.yahoo.com, use en or us. Sites with news domains other than *.news.yahoo.com, such as de.nachrichten.yahoo.com or news.yahoo.co.jp, are not supported.\n\n`Category`\n\nThe parsing method for Yahoo Hong Kong and Taiwan is quite unique. All supported categories are as follows\n\nCategory for hk.news.yahoo.com (hongkong)\n\n| 全部     | 港聞      | 兩岸國際 | 財經      | 娛樂          | 體育   | 健康   | 親子       | 副刊       |\n| ------- | --------- | -------- | -------- | ------------- | ------ | ------ | --------- | ---------- |\n| (empty) | hong-kong | world    | business | entertainment | sports | health | parenting | supplement |\n\nCategory for tw.news.yahoo.com (taiwan)\n\n| 全部     | 政治     | 財經    | 娛樂          | 運動    | 社會地方 | 國際   | 生活      | 健康   | 科技        |\n| ------- | -------- | ------- | ------------- | ------ | -------- | ----- | --------- | ------ | ---------- |\n| (empty) | politics | finance | entertainment | sports | society  | world | lifestyle | health | technology |\n\nOther Yahoo news is fetched from the RSS provided by Yahoo. Please refer to the categories displayed on the pages of *.news.yahoo.com (for example, \"world\"), and try to access *.news.yahoo.com/rss/world to see if it is accessible and contains recent news (some categories exist but are not updated). If it is accessible and has recent news, then that category can be used on the corresponding site. For example, the available categories for news.yahoo.com are as follows\n\nCategory for news.yahoo.com (US)\n\n| All     | US | Politics | World | Science | Tech |\n| ------- | -- | -------- | ----- | ------- | ---- |\n| (empty) | us | politics | world | science | tech |\n\nTo give another example, since uk.news.yahoo.com/rss/ukoriginal is accessible and has recent news, /yahoo/news/uk/ukoriginal is a valid RSSHub route.\n\n`author`\n\nFor Yahoo Hong Kong and Yahoo Taiwan, please use another \"news source\" route.\n\nFor other Yahoo News, this route's RSS provides the author field. You can use RSSHub's built-in \"content filtering\" feature. For example, /yahoo-wg/news/tw/technology?filter_author=Yahoo%20Tech|Engadget can filter out news with authors containing Yahoo Tech or Engadget from Yahoo Taiwan's technology news, which is the Chinese version of Engadget.\n",
         "zh": {
           "name": "新闻",
-          "description": "\n`区域 Region`\n\n支持所有 *.news.yahoo.com 中*号所代表的区域, 例如`hk/tw/au/ca/fr/malaysia/nz/sg/uk/en(us)`, 其中 www.yahoo.com 用 en 或 us 来表示。不支持新闻域名不为 *.news.yahoo.com 的站点如 de.nachrichten.yahoo.com 或 news.yahoo.co.jp。\n\n`分类 Category`\n\n香港和台湾雅虎的读取方式比较特别, 所有支持的 category 如下\n\nhk.news.yahoo.com (香港) 所支持的分类\n\n| 全部     | 港聞      | 兩岸國際 | 財經      | 娛樂          | 體育   | 健康   | 親子       | 副刊       |\n| ------- | --------- | -------- | -------- | ------------- | ------ | ------ | --------- | ---------- |\n| （留空） | hong-kong | world    | business | entertainment | sports | health | parenting | supplement |\n\ntw.news.yahoo.com (台湾) 所支持的分类\n\n| 全部     | 政治     | 財經    | 娛樂          | 運動    | 社會地方 | 國際   | 生活      | 健康   | 科技        | 品味  |\n| ------- | -------- | ------- | ------------- | ------ | -------- | ----- | --------- | ------ | ---------- | ----- |\n| （留空） | politics | finance | entertainment | sports | society  | world | lifestyle | health | technology | style |\n\n其他雅虎新闻读取自 yahoo 提供的 RSS, 请根据 *.news.yahoo.com 的页面上展示的分类(例如 world ), 尝试 *.news.yahoo.com/rss/world 能否访问并且有近期的新闻(有些分类存在但未更新), 如果可以的话则该分类可以用在相应站点, 例如 news.yahoo.com 可用的分类如下\n\nnews.yahoo.com (美国) 所支持的分类\n\n| All     | US | Politics | World | Science | Tech |\n| ------- | -- | -------- | ----- | ------- | ---- |\n| (留空)  | us | politics | world | science | tech |\n\n再举例, 由于 uk.news.yahoo.com/rss/ukoriginal 可以访问并且有较新的新闻, 所以 /yahoo/news/uk/ukoriginal 是一个有效的RSSHub路由。\n\n`作者 author`\n\n对于香港和台湾雅虎, 请使用另一个\"新聞來源\"路由。\n\n对于其他雅虎新闻, 本路由的 RSS 中提供了 author 字段, 可使用 RSSHub 的内置\"内容过滤\"功能, 例如 /yahoo-wg/news/tw/technology?filter_author=Yahoo%20Tech|Engadget 可从台湾雅虎的科技新闻中过滤出作者名称中包含 Yahoo Tech 或者 Engadget 的新闻, 即瘾科技中文版。\n"
+          "description": "\n`区域 Region`\n\n支持所有 *.news.yahoo.com 中*号所代表的区域, 例如`hk/tw/au/ca/fr/malaysia/nz/sg/uk/en(us)`, 其中 www.yahoo.com 用 en 或 us 来表示。不支持新闻域名不为 *.news.yahoo.com 的站点如 de.nachrichten.yahoo.com 或 news.yahoo.co.jp。\n\n`分类 Category`\n\n香港和台湾雅虎的读取方式比较特别, 所有支持的 category 如下\n\nhk.news.yahoo.com (香港) 所支持的分类\n\n| 全部     | 港聞      | 兩岸國際 | 財經      | 娛樂          | 體育   | 健康   | 親子       | 副刊       |\n| ------- | --------- | -------- | -------- | ------------- | ------ | ------ | --------- | ---------- |\n| （留空） | hong-kong | world    | business | entertainment | sports | health | parenting | supplement |\n\ntw.news.yahoo.com (台湾) 所支持的分类\n\n| 全部     | 政治     | 財經    | 娛樂          | 運動    | 社會地方 | 國際   | 生活      | 健康   | 科技        |\n| ------- | -------- | ------- | ------------- | ------ | -------- | ----- | --------- | ------ | ---------- |\n| （留空） | politics | finance | entertainment | sports | society  | world | lifestyle | health | technology |\n\n其他雅虎新闻读取自 yahoo 提供的 RSS, 请根据 *.news.yahoo.com 的页面上展示的分类(例如 world ), 尝试 *.news.yahoo.com/rss/world 能否访问并且有近期的新闻(有些分类存在但未更新), 如果可以的话则该分类可以用在相应站点, 例如 news.yahoo.com 可用的分类如下\n\nnews.yahoo.com (美国) 所支持的分类\n\n| All     | US | Politics | World | Science | Tech |\n| ------- | -- | -------- | ----- | ------- | ---- |\n| (留空)  | us | politics | world | science | tech |\n\n再举例, 由于 uk.news.yahoo.com/rss/ukoriginal 可以访问并且有较新的新闻, 所以 /yahoo/news/uk/ukoriginal 是一个有效的RSSHub路由。\n\n`作者 author`\n\n对于香港和台湾雅虎, 请使用另一个\"新聞來源\"路由。\n\n对于其他雅虎新闻, 本路由的 RSS 中提供了 author 字段, 可使用 RSSHub 的内置\"内容过滤\"功能, 例如 /yahoo-wg/news/tw/technology?filter_author=Yahoo%20Tech|Engadget 可从台湾雅虎的科技新闻中过滤出作者名称中包含 Yahoo Tech 或者 Engadget 的新闻, 即瘾科技中文版。\n"
         },
         "location": "news/index.ts",
         "module": () => import('@/routes/yahoo/news/index.ts')
@@ -135247,8 +135349,8 @@ export default {
     },
     "apiRoutes": {},
     "name": "Yahoo",
-    "url": "hk.news.yahoo.com",
-    "lang": "zh-HK"
+    "url": "news.yahoo.com",
+    "lang": "en-us"
   },
   "yamap": {
     "routes": {
@@ -137214,9 +137316,15 @@ export default {
         "parameters": {
           "id": "漫画ID"
         },
-        "example": "/zaimanhua/comic/14488",
+        "example": "/zaimanhua/comic/57069",
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "ZAIMANHUA_TOKEN",
+              "optional": true,
+              "description": "用户登录后，可以从浏览器开发者工具 Network 面板中的请求信息中获取 token，使用请求中的 `Authorization` 的值，完整设置为 `Bearer <token>`，或直接设置 token 并由路由自动补齐 `Bearer ` 前缀。"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -137237,6 +137345,7 @@ export default {
         "maintainers": [
           "kjasn"
         ],
+        "description": "::: Warning\n未登录用户无法获取到所有漫画，需要设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。\n且由于源网站本身的限制，建议尽量在部署于中国大陆网络内的 RSSHub 节点中使用本路由。若在海外网络环境中使用，即使设置了`ZAIMANHUA_TOKEN`环境变量，也可能无法获取全部漫画。\n:::",
         "location": "comic.ts",
         "module": () => import('@/routes/zaimanhua/comic.ts')
       },
@@ -137247,7 +137356,13 @@ export default {
         ],
         "example": "/zaimanhua/update",
         "features": {
-          "requireConfig": false,
+          "requireConfig": [
+            {
+              "name": "ZAIMANHUA_TOKEN",
+              "optional": true,
+              "description": "可从浏览器开发者工具中抓取站点请求头 `Authorization` 的 Bearer token，并配置为环境变量。可设置为完整值 `Bearer <token>`，或仅设置 token 由路由自动补齐 `Bearer ` 前缀。"
+            }
+          ],
           "requirePuppeteer": false,
           "antiCrawler": false,
           "supportBT": false,
@@ -137267,6 +137382,7 @@ export default {
         "maintainers": [
           "kjasn"
         ],
+        "description": "::: Warning\n建议设置`ZAIMANHUA_TOKEN`环境变量以使用 API 授权访问。且由于源网站本身的限制，建议尽量在部署于中国大陆网络内的 RSSHub 节点中使用本路由。若在海外网络环境中使用，即使设置了`ZAIMANHUA_TOKEN`环境变量，也可能无法获取全部漫画。\n:::",
         "location": "update.ts",
         "module": () => import('@/routes/zaimanhua/update.ts')
       }
@@ -139741,7 +139857,7 @@ export default {
       "/novel/:type": {
         "path": "/novel/:type",
         "name": "小说列表",
-        "url": "zxcs.info",
+        "url": "zxcs.click",
         "maintainers": [
           "liaochuan"
         ],
@@ -139764,7 +139880,7 @@ export default {
         "radar": [
           {
             "source": [
-              "zxcs.info/:type"
+              "zxcs.click/:type"
             ],
             "target": "/novel/:type"
           }
@@ -139775,7 +139891,7 @@ export default {
     },
     "apiRoutes": {},
     "name": "知轩藏书",
-    "url": "zxcs.info",
+    "url": "zxcs.click",
     "lang": "zh-CN"
   },
   "zyshow": {
