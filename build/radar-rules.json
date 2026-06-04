@@ -11338,6 +11338,19 @@
       }
     ]
   },
+  "chnmus.net": {
+    "_name": "Henan Museum",
+    "www": [
+      {
+        "title": "Special Exhibitions",
+        "docs": "https://docs.rsshub.app/routes/travel",
+        "source": [
+          "/ch/information/exhibition/index.html"
+        ],
+        "target": "/chnmus/information/exhibition"
+      }
+    ]
+  },
   "chnmuseum.cn": {
     "_name": "National Museum Of China",
     ".": [
@@ -11356,6 +11369,16 @@
           "/zx/xwzt"
         ],
         "target": "/chnmuseum/zx/xwzt"
+      }
+    ],
+    "www": [
+      {
+        "title": "Exhibitions",
+        "docs": "https://docs.rsshub.app/routes/travel",
+        "source": [
+          "/zl/"
+        ],
+        "target": "/chnmuseum/zl"
       }
     ]
   },
@@ -15298,6 +15321,19 @@
           "/"
         ],
         "target": "/douyu/post/:id"
+      }
+    ]
+  },
+  "dpm.org.cn": {
+    "_name": "The Palace Museum",
+    "www": [
+      {
+        "title": "Current Exhibitions",
+        "docs": "https://docs.rsshub.app/routes/travel",
+        "source": [
+          "/classify/exhibition.html"
+        ],
+        "target": "/dpm/exhibitions"
       }
     ]
   },
@@ -25626,6 +25662,20 @@
           "/:category/feeds"
         ],
         "target": "/ithome/tw/feeds/:category"
+      }
+    ]
+  },
+  "itsec.gov.cn": {
+    "_name": "中国信息安全测评中心",
+    "www": [
+      {
+        "title": "新闻发布",
+        "docs": "https://docs.rsshub.app/routes/government",
+        "source": [
+          "/zxxw/index.html",
+          "/zxxw/"
+        ],
+        "target": "/itsec/news"
       }
     ]
   },
@@ -41190,12 +41240,33 @@
     "_name": "Shanghai Museum",
     "www": [
       {
+        "title": "News & Announcements",
+        "docs": "https://docs.rsshub.app/routes/travel",
+        "source": [
+          "/mu/frontend/pg/infomation/news"
+        ],
+        "target": "/shanghaimuseum/information/news"
+      },
+      {
         "title": "Special Exhibitions",
         "docs": "https://docs.rsshub.app/routes/travel",
         "source": [
           "/mu/frontend/pg/display/offline-exhibit"
         ],
         "target": "/shanghaimuseum/display/offline-exhibit"
+      }
+    ]
+  },
+  "shanximuseum.com.cn": {
+    "_name": "Shanxi Museum",
+    "www": [
+      {
+        "title": "Temporary Exhibitions",
+        "docs": "https://docs.rsshub.app/routes/travel",
+        "source": [
+          "/sx/exhibition/temporary.html"
+        ],
+        "target": "/shanximuseum/exhibition/temporary"
       }
     ]
   },
@@ -42204,6 +42275,16 @@
   },
   "sjtu.edu.cn": {
     "_name": "上海交通大学",
+    "www.cs": [
+      {
+        "title": "计算机学院 - 学术活动",
+        "docs": "https://docs.rsshub.app/routes/university",
+        "source": [
+          "/xshd.html"
+        ],
+        "target": "/sjtu/cs/xshd"
+      }
+    ],
     "gs": [
       {
         "title": "研究生通知公告",

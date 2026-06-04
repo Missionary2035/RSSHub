@@ -1668,11 +1668,17 @@
   "/chlinlearn/daily-blog": [
     "huyyi"
   ],
+  "/chnmus/information/exhibition/:type?": [
+    "magazian"
+  ],
   "/chnmuseum/zx/xingnew": [
     "ShabbyWhineYear"
   ],
   "/chnmuseum/zx/xwzt": [
     "ShabbyWhineYear"
+  ],
+  "/chnmuseum/zl/:type?/:subType?": [
+    "magazian"
   ],
   "/chocolatey/packages/:id": [
     "nczitzk"
@@ -2579,6 +2585,9 @@
   ],
   "/douyu/post/:id": [
     "nczitzk"
+  ],
+  "/dpm/exhibitions/:type?": [
+    "magazian"
   ],
   "/dribbble/keyword/:keyword": [
     "DIYgod",
@@ -4787,6 +4796,9 @@
   "/ithome/zt/:id?": [
     "nczitzk"
   ],
+  "/itsec/news": [
+    "ch3n4y"
+  ],
   "/iwara/users/:username/:type?": [
     "Fatpandac"
   ],
@@ -5186,6 +5198,9 @@
   ],
   "/kisskiss/blog/:category?": [
     "keocheung"
+  ],
+  "/kleinanzeigen/search/:routeParams": [
+    "LunyaaDev"
   ],
   "/komiic/comic/:id": [
     "NekoAria"
@@ -7766,7 +7781,13 @@
   "/sfacg/novel/chapter/:id": [
     "keocheung"
   ],
+  "/shanghaimuseum/information/news/:type?": [
+    "magazian"
+  ],
   "/shanghaimuseum/display/offline-exhibit/:type?": [
+    "magazian"
+  ],
+  "/shanximuseum/exhibition/temporary/:type?": [
     "magazian"
   ],
   "/shcstheatre/programs": [
@@ -7907,6 +7928,9 @@
   ],
   "/sjtu/tongqu/:type?": [
     "SeanChao"
+  ],
+  "/sjtu/cs/xshd": [
+    "BeaCox"
   ],
   "/sjtu/gs/:type/:num?": [
     "dzx-dzx"
